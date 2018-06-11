@@ -1,0 +1,56 @@
+shell脚本：
+1./dev/null 该文件中的内容会立即被清除掉，一般可用于命令执行结束后，不希望在terminal输出信息时；
+2.${#array_name[@]} 获取定义的数组长度
+3. while循环与case语句：
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -i|--iterations)
+        iterations=$2
+        shift
+        ;;
+      -n|--number_of_runs)
+        number_of_runs=$2
+        shift
+        ;;
+      --apks_dir)
+        apks_dir=$2
+        shift
+        ;;
+      -u|--maximize_cpu_freq)
+        maximize_cpu_freq=$2
+        shift
+        ;;
+      -g|--maximize_gpu_freq)
+        maximize_gpu_freq=$2
+        shift
+        ;;
+      *)
+        echo "Unknown option $1"
+        usage
+        exit 1
+        ;;
+    esac
+    shift
+  done
+  4.if条件语句：
+  if [[ "$device_count" -lt 1 ]]; then
+    echo "No device found" && exit 1
+  elif [[ "$device_count" -eq 1 ]]; then
+    device_serial="${device_serial_array[0]}"
+    adb root>/dev/null
+    return
+  fi
+  5.遍历： for device_serial in "${!device_serial_array[@]}"; do
+            device_serial="${device_serial_array[$device_serial]}"
+            device_name=$(adb -s "$device_serial" shell getprop "ro.product.name"|tr -d '\r')
+            echo "$indent[$i] $device_name ($device_serial)"
+            i=$((i+1))
+        done
+ 6.adb shell dumpsys power|grep "mHoldingDisplaySuspendBlocker"|cut -d '=' -f 2
+    adb shell dumpsys power|grep "mHoldingDisplaySuspendBlocker"输出mHoldingDisplaySuspendBlocker=true
+      获取手机是否处于锁屏界面，将匹配获得的结果传入cut中>以‘=’为分隔符，获取第二个字段true。
+7.adb shell svc [power|wifi|data|usb|nfc|bluetooth] help

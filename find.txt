@@ -1,0 +1,13 @@
+find命令
+1.基本格式 find path expression
+  例：find / -name http.conf 在系统根目录下查找文件http.conf
+      find /etc -name "*src" 在系统根目录下查找以“src”结尾的文件
+
+2.常用参数
+  -amin -10 最后10分钟访问的文件
+  -atime -2 最后2天访问的文件
+  -empty  为空的文件或文件夹
+  -group   隶属于某组的文件
+  -user    隶属于某用户的文件
+  ！ -and(-a) -or(-o)用于连接多个命令条件
+

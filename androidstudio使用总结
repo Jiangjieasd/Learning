@@ -1,0 +1,22 @@
+ctrl+shift+n :文件搜索
+ctrl+shift+f:模块搜索
+ctrl+f：在当前文件中搜索
+ctrl+e: 最近文件
+alt+f12:打开terminal
+ALT+7: FILE STRUCTURE
+alt+1: project 窗口
+
+Android Studio完美配置：
+1.Open the Settings/Preferences dialog (OSX/Unix: ⌘+,, Windows: Ctrl+Alt+S)
+2.In the left-hand pane, select Plugins.
+3.Click Browse repositories… and search for Material Theme UI
+4.Click Install plugin and confirm your intention to download and install the plugin.
+5.Click OK in the Settings dialog and restart for the changes to take effect.
+
+Find plugin
+1.Open IDE and locate File >> Settings >> Plugins and click Browse Repositories…
+2.Search for and click ChroMATERIAL and click Install plugin
+Use Color Scheme
+1.Locate File >> Settings >> Editor >> Colors & Fonts >> Scheme
+2.Choose ChroMATERIAL and click Apply/OK.
+

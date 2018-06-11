@@ -1,0 +1,4 @@
+当远程建立新分支，但在本地运行git branch -a 无法查询，是因为未更新分支列表，应按照如下命令：
+    1.git fetch：用于更新分支列表
+    2.git branch -a :查询分支
+    3.git checkout xxxxx:切换到目标分支
