@@ -1,0 +1,69 @@
+sudo﻿1.安装Ubuntu14.04系统
+
+2.更新系统
+	$ sudo apt-get update
+	$ sudo apt-get upgrade
+
+3.更新语言
+	设置->系统设置->语言支持
+
+4.安装依赖组件
+14.04依赖组件
+	$ sudo apt-get install -y curl git flex bison gperf build-essential libncurses5-dev:i386 libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386 dpkg-dev libsdl-dev libesd0-dev
+	注：依赖组件必须全部安装，不然会出现各种错误
+
+//opensuse依赖组件
+//zip git flex bison gperf devel_basis schedtool squashfs libesd-devel build libSDL-devel gcc-c++  libncurses5 libx11 libreadline6  python-markdown libxml2-utils
+//mesa-libglesv1 mingw32 zlib1g-dev:i386 dpkg-dev
+
+
+5.安装openjdk1.7（联网状态）
+	$ sudo add-apt-repository ppa:openjdk-r/ppa
+	$ sudo apt-get update
+	$ sudo apt-get install openjdk-7-jdk
+
+6.安装openjdk1.8
+	$ sudo apt-get install openjdk-8-jdk
+	输入：$ java -version 查看版本
+
+7.openjdk的版本切换
+	$ sudo sudo update-alternatives --config java
+	输入以上命令会出现以下的结果
+	  选择          路径                                            优先级     状态
+	------------------------------------------------------------
+	  0            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1071      自动模式
+	  1            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1071      手动模式
+	* 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1069      手动模式
+
+	要维持当前值[*]请按回车键，或者键入选择的编号：
+	在
+
+
+6.安装git(git分为两种，qgit为图形化版本，git为命令行版本)
+	$ sudo apt-get install git
+	配置git用户信息
+	$ git config --global user.name xx
+	$ git config --global user.email xx@xx.com
+	$ ssh-keygen -t rsa
+	//复制ubuntu12.02主目录下.ssh文件夹并覆盖ubuntu14.04主目录下.ssh文件夹
+
+7、安装bcompare
+      (1).见Beyond-Compare-4.x-linux-破解方法附件
+
+
+8、安装sp-flash-tool
+      (1). 安装驱动依赖  sudo apt-get install libusb-dev
+      (2). 进入软件文件夹  cd /sp_flash_tool
+      (3). 添加执行权限  chmod +x flash_tool
+      (4). 添加用户组  sudo adduser username dialout
+      (5). 激活用户组  newgrp - dialout
+      (6). 退出用户组  exit
+      (7). 如果系统是  12.04 则已经可以使用
+      (8). 如果系统是  14.04及以上则执行以下操作
+      (9). 编辑此文件  sudo gedit /etc/udev/rules.d/20-mm-blacklist-mtk.rules
+      (10).在打开的文件里添加以下两行：
+	ATTRS{idVendor}=="0e8d", ENV{ID_MM_DEVICE_IGNORE}="1"
+	ATTRS{idVendor}=="6000", ENV{ID_MM_DEVICE_IGNORE}="1"
+      (11).重启udev sudo service udev restart
+
+
