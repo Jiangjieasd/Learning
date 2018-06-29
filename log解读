@@ -1,0 +1,31 @@
+1.抓取log：adb logcat -c清空log buffer中的所有log；执行exception复现操作；adb logcat -d 将操作期间发生的log全部抓取出来
+    log中搜索关键字：FATAL EXCEPTION、ERROE、ANR等
+
+2.adb logcat tag1:E(D/I/W)<...> *:s 对打印的log进行筛选
+
+3.log中打印出crash调用栈时搜索关键字：AndroidRuntime
+
+4.一般应用会定义自己的log工具，一般可以直接在logutil中搜索
+
+5.在android studio中搜索，tag一般加上引号，可以屏蔽较多干扰信息
+
+6.mtk的机制中，当logd中有读者（mobilelogd ，logcat..）的时候, 将设置log的过滤等级为V； 在logd中没有读者的时候，log的过滤等级会设置成 I   
+Android 使用属性对log 进行过滤， 在debug的时候可以通过下面的属性进行设置（有效性优先级由高到低,perisist 属性重启有效）：
+   * log.tag.<tag>
+   * persist.log.tag.<tag>   
+   * log.tag
+   * persist.log.tag
+Log level is:
+ V: ANDROID_LOG_VERBOSE （#define LOG_NDEBUG 0）
+ D: ANDROID_LOG_DEBUG
+ I: ANDROID_LOG_INFO
+ W: ANDROID_LOG_WARN
+ E: ANDROID_LOG_ERROR 
+ A: ANDROID_LOG_FATAL
+ S: -1 /* ANDROID_LOG_SUPPRESS */
+ （注：CTS测试的最低过滤等级为I）
+ For example:
+If you want set all level to error --> adb shell setprop log.tag E 
+If you want only set ABC tag to error level --> adb shell setprop log.tag.ABC E
+If global and special tag property all set, It will prior use module tag value.
+————————————————————————————当将某tag的log级别设置为i以上，则在cts测试过程中不会打印在device log中

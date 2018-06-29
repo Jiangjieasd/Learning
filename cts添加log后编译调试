@@ -1,0 +1,22 @@
+[DESCRIPTION]
+有的时候分析cts问题，需要在cts代码中添加log，然后再用添加过log的cts代码所build出来的cts apk去做测试复现问题。
+下面介绍如何在不同版本编译添加过log的cts apk。
+ 
+[SOLUTION]
+Andorid L及以后的AOSP版本编译方法：
+source build/envsetup.sh
+lunch ${your_project}
+source mbldenv.sh    //注意：mtk内部同事要执行此行，非mtk同事则不必执行此行
+make BUILD_CTS=yes -j24 cts  2>&1 | tee build_cts_log  //-j后面的24代表的是编译环境的cpu core count，根据编译环境自行调整数值即可
+note: 2>&1是将标准错误重定向到标准输出中去  tee build_cts_log 是将前半部分执行的标准输出写入build_cts_log文件中
+附上Android KK版本及以前的build方法：
+ ./mk -o=BUILD_CTS=yes ${your_project} cts 
+ 
+build完之后cts apk路径：out/host/linux-x86/cts/android-cts.zip    
+可以直接在out/host/linux-x86/cts/android-cts/repository/testcases/目录下去寻找对应的CtsXXX.apk即可
+ 
+注意：若是mtk内部员工用ODB 系统来build cts apk，记得在Get intermediate files in out folders:这个栏位填写cts apk的完整名称，如CtsWidgetTestCases.apk。
+
+若不知cts 代码所对应的apk为何名？请到alps代码里找到该cts代码最近一层目录的Android.mk文件中寻找LOCAL_PACKAGE_NAME := 这个栏位就是apk的名字。
+
+

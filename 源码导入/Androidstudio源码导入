@@ -1,0 +1,11 @@
+1.source build/envsetup.sh
+2.mmm development/build/idegen/
+3.sh development/build/idegen/idegne.sh
+4.code Android.iml(删除部分不导入的目录)
+5.启动android studio,file>open>android.ipr文件即可
+
+
+
+第二种方案：
+android studio新建一个项目之后，file>project structure>Modules右方面板，新建Module，选择源码路径，导入即可
+，某项目需要代码导航，删除默认依赖，建立新的依赖
